@@ -30,9 +30,9 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
+    @NotNull (message = "Title is mandatory")
     private String title;
-    @NotNull
+    @NotNull (message = "Content is mandatory")
     private String content;
     @CreatedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
