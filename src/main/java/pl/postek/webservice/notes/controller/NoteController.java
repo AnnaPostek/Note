@@ -39,7 +39,7 @@ public class NoteController {
             return new ResponseEntity<>(String.format("Note with id = %d is updated successfully", savedNote.getId()),
                     HttpStatus.OK);
         } else
-            throw new NoteNotFoundException(String.format("Note with id = %d not found", id));
+            throw new NoteNotFoundException();
     }
 
     @DeleteMapping("/deleteNote/{id}")
@@ -49,7 +49,7 @@ public class NoteController {
             return new ResponseEntity<>(String.format("Note with id = %d is deleted successfully", id),
                     HttpStatus.OK);
         } else {
-            throw new NoteNotFoundException(String.format("Note with id = %d not found", id));
+            throw new NoteNotFoundException();
         }
     }
 
@@ -59,6 +59,12 @@ public class NoteController {
             service.getInfoLastChangeRevision(id);
             return new ResponseEntity<>("service.getInfoLastChangeRevision(id)", HttpStatus.OK);
         }
-        throw new NoteNotFoundException(String.format("Note with id = %d not found", id));
+        throw new NoteNotFoundException();
     }
+
+    @ExceptionHandler(value = NoteNotFoundException.class)
+    public ResponseEntity<Object> exception(NoteNotFoundException exception) {
+        return new ResponseEntity<>("Note not found", HttpStatus.NOT_FOUND);
+    }
+
 }
