@@ -7,4 +7,5 @@ import pl.postek.webservice.notes.model.Note;
 
 @Repository
 public interface NoteRepository extends RevisionRepository<Note, Long, Long> , JpaRepository<Note, Long> {
+    boolean existsById(Long id);
 }

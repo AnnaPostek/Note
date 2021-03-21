@@ -2,6 +2,7 @@ package pl.postek.webservice.notes.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.postek.webservice.notes.exception.NoteNotFoundException;
 import pl.postek.webservice.notes.model.Note;
 import pl.postek.webservice.notes.repository.NoteRepository;
 
@@ -26,12 +27,18 @@ public class NoteService {
     }
 
     public Note getNoteById(Long id) {
-        return repository.findById(id).get();
+        return repository.findById(id)
+                .orElseThrow(() -> {
+                    throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
+                });
     }
 
 
     public Note updateNote(Long id, Note toUpdate) {
-        Note byId = repository.findById(id).get();
+        Note byId = repository.findById(id)
+                .orElseThrow(() -> {
+                    throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
+                });
         byId.setTitle(toUpdate.getTitle());
         byId.setContent(toUpdate.getContent());
         Note save = repository.save(byId);
@@ -42,8 +49,15 @@ public class NoteService {
         repository.deleteById(id);
     }
 
+    public boolean noteExistsById(Long id) {
+        return repository.existsById(id);
+    }
+
     public void getInfoLastChangeRevision(Long id) {
-        System.out.println(repository.findLastChangeRevision(id));
+        repository.findLastChangeRevision(id)
+                .orElseThrow(() -> {
+                    throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
+                });
     }
 
     public void getRevision(Long id) {

@@ -9,7 +9,4 @@ public class NoteNotFoundException extends RuntimeException {
         super(message);
     }
 
-    public NoteNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }
