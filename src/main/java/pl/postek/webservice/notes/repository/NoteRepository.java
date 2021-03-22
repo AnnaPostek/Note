@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pl.postek.webservice.notes.model.Note;
 
 @Repository
-public interface NoteRepository extends RevisionRepository<Note, Long, Long> , JpaRepository<Note, Long> {
-    boolean existsById(Long id);
+public interface NoteRepository extends RevisionRepository<Note, Integer, Integer> , JpaRepository<Note, Integer> {
+    boolean existsById(Integer id);
 }

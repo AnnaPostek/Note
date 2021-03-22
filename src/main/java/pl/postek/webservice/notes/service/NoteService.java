@@ -26,7 +26,7 @@ public class NoteService {
         return repository.save(note);
     }
 
-    public Note getNoteById(Long id) {
+    public Note getNoteById(int id) {
         return repository.findById(id)
                 .orElseThrow(() -> {
                     throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
@@ -34,7 +34,7 @@ public class NoteService {
     }
 
 
-    public Note updateNote(Long id, Note toUpdate) {
+    public Note updateNote(int id, Note toUpdate) {
         Note byId = repository.findById(id)
                 .orElseThrow(() -> {
                     throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
@@ -45,22 +45,22 @@ public class NoteService {
         return save;
     }
 
-    public void deleteNote(Long id) {
+    public void deleteNote(int id) {
         repository.deleteById(id);
     }
 
-    public boolean noteExistsById(Long id) {
+    public boolean noteExistsById(int id) {
         return repository.existsById(id);
     }
 
-    public void getInfoLastChangeRevision(Long id) {
+    public void getInfoLastChangeRevision(int id) {
         repository.findLastChangeRevision(id)
                 .orElseThrow(() -> {
                     throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
                 });
     }
 
-    public void getRevision(Long id) {
-        repository.findRevision(id, 2L);
+    public void getRevision(int id) {
+        repository.findRevision(id, 2);
     }
 }

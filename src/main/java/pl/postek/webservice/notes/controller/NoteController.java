@@ -29,6 +29,12 @@ public class NoteController {
         return new ResponseEntity<>(allNotes, HttpStatus.OK);
     }
 
+    @GetMapping("/note/{id}")
+    public ResponseEntity<Object> getNote(@PathVariable int id) {
+        Note noteById = service.getNoteById(id);
+        return new ResponseEntity<>(noteById, HttpStatus.OK);
+    }
+
     @PostMapping("/addNote")
     public ResponseEntity<Object> saveNote(@RequestBody @Valid Note note) {
         Note savedNote = service.saveNote(note);
@@ -37,7 +43,7 @@ public class NoteController {
     }
 
     @PutMapping("/updateNote/{id}")
-    public ResponseEntity<Object> updateNote(@PathVariable Long id, @RequestBody @Valid Note note) {
+    public ResponseEntity<Object> updateNote(@PathVariable int id, @RequestBody @Valid Note note) {
         if (service.noteExistsById(id)) {
             Note savedNote = service.updateNote(id, note);
             return new ResponseEntity<>(String.format("Note with id = %d is updated successfully", savedNote.getId()),
@@ -47,7 +53,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/deleteNote/{id}")
-    public ResponseEntity<Object> deleteNote(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteNote(@PathVariable int id) {
         if (service.noteExistsById(id)) {
             service.deleteNote(id);
             return new ResponseEntity<>(String.format("Note with id = %d is deleted successfully", id),
@@ -58,7 +64,7 @@ public class NoteController {
     }
 
     @GetMapping("/revision/{id}")
-    public ResponseEntity<Object> lastChangeRevision(@PathVariable Long id) {
+    public ResponseEntity<Object> lastChangeRevision(@PathVariable int id) {
         if (service.noteExistsById(id)) {
             service.getInfoLastChangeRevision(id);
             return new ResponseEntity<>("service.getInfoLastChangeRevision(id)", HttpStatus.OK);

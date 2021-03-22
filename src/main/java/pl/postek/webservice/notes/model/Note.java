@@ -29,7 +29,7 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     @NotNull (message = "Title is mandatory")
     private String title;
     @NotNull (message = "Content is mandatory")
