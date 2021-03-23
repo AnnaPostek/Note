@@ -20,9 +20,9 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Builder
+@Table(name = "notes")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "notes")
 @Audited
 @EntityListeners(AuditingEntityListener.class)
 public class Note {
@@ -40,4 +40,9 @@ public class Note {
     @LastModifiedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modified;
+
+    public Note(String title, String content) {
+        this.title=title;
+        this.content=content;
+    }
 }
