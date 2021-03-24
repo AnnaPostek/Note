@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -66,10 +67,11 @@ public class NoteController {
         }
     }
 
-    @GetMapping("/revision/{id}")
-    public String lastChangeRevision(@PathVariable int id) {
-        Revision<Integer, Note> infoLastChangeRevision = service.getInfoLastChangeRevision(id);
-        return infoLastChangeRevision.toString();
+    @GetMapping("/notes/{id}/revisions")
+    public ResponseEntity<List<Note>>  lastChangeRevision(@PathVariable int id) {
+        List<Note> noteRevisionList = service.getRevisionsForNote(id).get().map(Revision::getEntity)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(noteRevisionList, HttpStatus.OK);
     }
 
     @ExceptionHandler(value = NoteNotFoundException.class)
