@@ -1,6 +1,5 @@
 package pl.postek.webservice.notes.service;
 
-import org.springframework.data.history.Revision;
 import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +33,6 @@ public class NoteService {
                     throw new NoteNotFoundException(String.format("Note with this id = %d not found", id));
                 });
     }
-
 
     public Note updateNote(int id, Note toUpdate) {
         Note byId = repository.findById(id)

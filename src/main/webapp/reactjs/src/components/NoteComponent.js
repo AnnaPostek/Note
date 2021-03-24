@@ -6,10 +6,6 @@ constructor(props) {
     super(props)
     this.state = {
         notes:[],
-        sort: {
-            column: null,
-            direction: 'desc',
-        },
     };
 }
 componentDidMount() {
@@ -26,7 +22,6 @@ render() {
     <thead>
         <tr>
             <td>Note title:</td>
-            <td>Note content</td>
             <td>Date created</td>
             <td>Date modification</td>
 
@@ -38,7 +33,6 @@ render() {
                 note =>
                 <tr key = {note.id}>
             <td>{note.title}</td>
-            <td>{note.content}</td>
             <td>{note.created}</td>
             <td>{note.modified}</td>
                 </tr>
