@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api")
 public class NoteController {
 
     private NoteService service;
