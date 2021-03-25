@@ -1,0 +1,14 @@
+import logo from './logo.svg';
+import './App.css';
+import NoteComponent from './components/NoteComponent';
+
+function App() {
+  return (
+    <div className="App">
+   <NoteComponent />
+
+    </div>
+  );
+}
+
+export default App;

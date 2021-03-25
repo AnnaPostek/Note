@@ -1,5 +1,6 @@
 package pl.postek.webservice.notes.controller;
 
+import org.springframework.data.history.Revision;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -13,8 +14,11 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping ("/api")
 public class NoteController {
 
     private NoteService service;
@@ -23,7 +27,7 @@ public class NoteController {
         this.service = service;
     }
 
-    @GetMapping("/allNotes")
+    @GetMapping("/notes")
     public ResponseEntity<List<Note>> getAllNotes() {
         List<Note> allNotes = service.getAllNotes();
         return new ResponseEntity<>(allNotes, HttpStatus.OK);
@@ -35,14 +39,14 @@ public class NoteController {
         return new ResponseEntity<>(noteById, HttpStatus.OK);
     }
 
-    @PostMapping("/addNote")
+    @PostMapping("/note")
     public ResponseEntity<Object> saveNote(@RequestBody @Valid Note note) {
         Note savedNote = service.saveNote(note);
         return new ResponseEntity<>("Note is created successfully with Id = " + savedNote.getId(),
                 HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateNote/{id}")
+    @PutMapping("/note/{id}")
     public ResponseEntity<Object> updateNote(@PathVariable int id, @RequestBody @Valid Note note) {
         if (service.noteExistsById(id)) {
             Note savedNote = service.updateNote(id, note);
@@ -52,7 +56,7 @@ public class NoteController {
             throw new NoteNotFoundException();
     }
 
-    @DeleteMapping("/deleteNote/{id}")
+    @DeleteMapping("/note/{id}")
     public ResponseEntity<Object> deleteNote(@PathVariable int id) {
         if (service.noteExistsById(id)) {
             service.deleteNote(id);
@@ -63,13 +67,11 @@ public class NoteController {
         }
     }
 
-    @GetMapping("/revision/{id}")
-    public ResponseEntity<Object> lastChangeRevision(@PathVariable int id) {
-        if (service.noteExistsById(id)) {
-            service.getInfoLastChangeRevision(id);
-            return new ResponseEntity<>("service.getInfoLastChangeRevision(id)", HttpStatus.OK);
-        }
-        throw new NoteNotFoundException();
+    @GetMapping("/notes/{id}/revisions")
+    public ResponseEntity<List<Note>>  lastChangeRevision(@PathVariable int id) {
+        List<Note> noteRevisionList = service.getRevisionsForNote(id).get().map(Revision::getEntity)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(noteRevisionList, HttpStatus.OK);
     }
 
     @ExceptionHandler(value = NoteNotFoundException.class)
