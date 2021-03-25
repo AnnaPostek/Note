@@ -41,8 +41,4 @@ public class Note {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modified;
 
-    public Note(String title, String content) {
-        this.title=title;
-        this.content=content;
-    }
 }

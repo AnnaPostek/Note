@@ -73,6 +73,7 @@ public class NoteController {
         return new ResponseEntity<>(noteRevisionList, HttpStatus.OK);
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = NoteNotFoundException.class)
     public ResponseEntity<Object> exception(NoteNotFoundException exception) {
         return new ResponseEntity<>("Note not found", HttpStatus.NOT_FOUND);

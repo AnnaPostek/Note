@@ -39,7 +39,7 @@ public class NoteControllerIntegrationTest {
         Note note = getBasicNote();
         service.saveNote(note);
         this.mockMvc
-                .perform(post("/api/note")
+                .perform(post("/note")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(note)))
@@ -58,7 +58,7 @@ public class NoteControllerIntegrationTest {
         noteList.add(note2);
         noteList.add(note3);
         this.mockMvc
-                .perform(get("/api/notes")
+                .perform(get("/notes")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(noteList.toString())))
@@ -71,7 +71,7 @@ public class NoteControllerIntegrationTest {
         service.saveNote(note);
         int id = service.getAllNotes().get(0).getId();
         this.mockMvc
-                .perform(delete("/api/note/{id}", String.valueOf(id))
+                .perform(delete("/note/{id}", String.valueOf(id))
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -83,12 +83,39 @@ public class NoteControllerIntegrationTest {
         service.saveNote(note);
         int id = service.getAllNotes().get(0).getId();
         this.mockMvc
-                .perform(get("/api/note/{id}", String.valueOf(id))
+                .perform(get("/note/{id}", String.valueOf(id))
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void shouldReturnOkStatus_whenDisplayRevisionsListOfNotes() throws Exception {
+        Note note = getBasicNote();
+        service.saveNote(note);
+        int id = service.getAllNotes().get(0).getId();
+        this.mockMvc
+                .perform(get("/notes/{id}/revisions", String.valueOf(id))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldReturnOkStatus_whenUpdateNote() throws Exception {
+        Note note = getBasicNote();
+        service.saveNote(note);
+        int id = service.getAllNotes().get(0).getId();
+        String title = "title";
+        String content = "content";
+        this.mockMvc
+                .perform(get("/notes/{id}/revisions", String.valueOf(id))
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(title))
+                        .content(objectMapper.writeValueAsString(content)))
+                .andExpect(status().isOk());
+    }
 
     private Note getBasicNote() {
         Note note = new Note();
