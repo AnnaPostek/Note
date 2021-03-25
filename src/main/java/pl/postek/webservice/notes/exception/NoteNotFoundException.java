@@ -1,5 +1,6 @@
 package pl.postek.webservice.notes.exception;
 
+
 public class NoteNotFoundException extends RuntimeException {
     public NoteNotFoundException() {
         super();

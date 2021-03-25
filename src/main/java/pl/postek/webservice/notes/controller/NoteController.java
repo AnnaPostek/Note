@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping ("/api")
 public class NoteController {
 
     private NoteService service;
@@ -68,12 +67,13 @@ public class NoteController {
     }
 
     @GetMapping("/notes/{id}/revisions")
-    public ResponseEntity<List<Note>>  lastChangeRevision(@PathVariable int id) {
+    public ResponseEntity<List<Note>> historyChangeRevision(@PathVariable int id) {
         List<Note> noteRevisionList = service.getRevisionsForNote(id).get().map(Revision::getEntity)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(noteRevisionList, HttpStatus.OK);
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = NoteNotFoundException.class)
     public ResponseEntity<Object> exception(NoteNotFoundException exception) {
         return new ResponseEntity<>("Note not found", HttpStatus.NOT_FOUND);
