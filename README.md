@@ -24,8 +24,11 @@ $ mvn clean install
 $ mvn spring-boot:run
 
 ## Web
-Application is available on below localhost:
-http://localhost:8080/
+Application is available on below localhost with port 8080:
+
+## Available Endpoints
+Test application with http://localhost:8080/ and below endpoints:
+![image](https://user-images.githubusercontent.com/56793192/112544683-9c8dc380-8db7-11eb-8f41-d18a6d73db40.png)
 
 ## Login to database
 Database H2 in memory is available on below localhost:
@@ -46,9 +49,6 @@ Below is more details examples of usages API
 
 Swagger is available for below localhost:
 http://localhost:8080/swagger-ui.html#/
-
-## Available Endpoints
-![image](https://user-images.githubusercontent.com/56793192/112544683-9c8dc380-8db7-11eb-8f41-d18a6d73db40.png)
 
 ## Examples usages
 It is possible for testing API in Swagger, Postman, curl and endpoints with GET Mapping directly on browser
