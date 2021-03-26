@@ -95,6 +95,7 @@ This endpoint return whole history of changes for particulary note
 curl -X GET "http://localhost:8080/notes/1/revisions" -H "accept: */*"
 
 example of revisions note, when the last one used delete note:
+
 ![image](https://user-images.githubusercontent.com/56793192/112611724-7c451f80-8e1e-11eb-9860-92dec38df485.png)
 
 ## Frontend
