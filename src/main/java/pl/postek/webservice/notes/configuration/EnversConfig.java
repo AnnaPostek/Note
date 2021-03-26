@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories(repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class,
         basePackages = "pl.postek.webservice.notes.repository")
-public class EnversDemoConfiguration {
+public class EnversConfig {
 
 }

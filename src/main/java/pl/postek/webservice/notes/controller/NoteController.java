@@ -33,30 +33,28 @@ public class NoteController {
     }
 
     @GetMapping("/note/{id}")
-    public ResponseEntity<Object> getNote(@PathVariable int id) {
-        Note noteById = service.getNoteById(id);
-        return new ResponseEntity<>(noteById, HttpStatus.OK);
+    public ResponseEntity<Note> getNote(@PathVariable int id) {
+        Note note = service.getNoteById(id);
+        return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
     @PostMapping("/note")
-    public ResponseEntity<Object> saveNote(@RequestBody @Valid Note note) {
+    public ResponseEntity<Note> saveNote(@RequestBody @Valid Note note) {
         Note savedNote = service.saveNote(note);
-        return new ResponseEntity<>("Note is created successfully with Id = " + savedNote.getId(),
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(savedNote, HttpStatus.CREATED);
     }
 
     @PutMapping("/note/{id}")
-    public ResponseEntity<Object> updateNote(@PathVariable int id, @RequestBody @Valid Note note) {
+    public ResponseEntity<Note> updateNote(@PathVariable int id, @RequestBody @Valid Note note) {
         if (service.noteExistsById(id)) {
             Note savedNote = service.updateNote(id, note);
-            return new ResponseEntity<>(String.format("Note with id = %d is updated successfully", savedNote.getId()),
-                    HttpStatus.OK);
+            return new ResponseEntity<>(savedNote, HttpStatus.OK);
         } else
             throw new NoteNotFoundException();
     }
 
     @DeleteMapping("/note/{id}")
-    public ResponseEntity<Object> deleteNote(@PathVariable int id) {
+    public ResponseEntity<String> deleteNote(@PathVariable int id) {
         if (service.noteExistsById(id)) {
             service.deleteNote(id);
             return new ResponseEntity<>(String.format("Note with id = %d is deleted successfully", id),
