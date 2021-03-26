@@ -98,12 +98,15 @@ example of revisions note, when the last one used delete note:
 
 ![image](https://user-images.githubusercontent.com/56793192/112611724-7c451f80-8e1e-11eb-9860-92dec38df485.png)
 
-## Frontend
+
+## Available Scripts
+
 In the project directory, you can run:
 
-npm start
-Runs the app in the development mode.
-Open http://localhost:3000 to view it in the browser.
+### `npm start`
 
-The page will reload if you make edits.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
 
