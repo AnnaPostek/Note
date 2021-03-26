@@ -38,6 +38,7 @@ add date according following:
 click Connect and after that you are connecing to database.
 
 on database loading initial data according below:
+
 ![image](https://user-images.githubusercontent.com/56793192/112544040-d9a58600-8db6-11eb-8ce2-d50019f62540.png)
 
 ## Testing the API 
@@ -67,10 +68,12 @@ click on note-controller then POST and Try it out, fill the values and click Exe
 curl -X POST "http://localhost:8080/note" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"content\": \"Java\", \"title\": \"SpringBoot\"}"
 
 Example of response above is according below:
+
 ![image](https://user-images.githubusercontent.com/56793192/112611361-017c0480-8e1e-11eb-9af9-bf2ed349b7db.png)
 
 ## Update note
 on Swagger need to complete id, and change values of content and title. Modification date is updated automatically.
+
 ![image](https://user-images.githubusercontent.com/56793192/112547944-be894500-8dbb-11eb-9a20-4c4c1b7dce24.png)
 
 ## Delete note
