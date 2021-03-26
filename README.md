@@ -27,7 +27,7 @@ $ mvn spring-boot:run
 Application is available on below localhost with port 8080:
 
 ## Available Endpoints
-Test application with http://localhost:8080/ and below endpoints:
+Start application with http://localhost:8080/ and below endpoints:
 ![image](https://user-images.githubusercontent.com/56793192/112544683-9c8dc380-8db7-11eb-8f41-d18a6d73db40.png)
 
 ## Login to database
@@ -35,6 +35,8 @@ Database H2 in memory is available on below localhost:
 http://localhost:8080/h2-console
 
 add date according following:
+jdbc url => jdbc:h2:mem:testdb
+UserName => sa
 
 ![image](https://user-images.githubusercontent.com/56793192/112542027-5f740200-8db4-11eb-9bd9-47f63cd7cc7c.png)
 
@@ -66,10 +68,6 @@ click on note-controller then POST and Try it out, fill the values and click Exe
 
 ### Add note in curl:
 curl -X POST "http://localhost:8080/note" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"content\": \"Java\", \"title\": \"SpringBoot\"}"
-
-Example of response above is according below:
-
-![image](https://user-images.githubusercontent.com/56793192/112611361-017c0480-8e1e-11eb-9af9-bf2ed349b7db.png)
 
 ## Update note
 on Swagger need to complete id, and change values of content and title. Modification date is updated automatically.
