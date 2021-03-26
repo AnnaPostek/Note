@@ -97,14 +97,19 @@ example of revisions note, when the last one used delete note:
 ![image](https://user-images.githubusercontent.com/56793192/112611724-7c451f80-8e1e-11eb-9860-92dec38df485.png)
 
 
-## Available Scripts
+## Running UI
 
 In the project directory, you can run:
 
-### `npm start`
+$ cd src/main/webapp/reactjs
 
-Runs the app in the development mode.\
+$ npm install
+
+$ npm start
+
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+![image](https://user-images.githubusercontent.com/56793192/112643909-246ddf00-8e45-11eb-9331-0a387fbf7fe1.png)
+
 
