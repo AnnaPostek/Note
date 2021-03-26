@@ -19,9 +19,9 @@ $ cd Note
 
 Once the clone is done, run below
 
-$ mvn -pl persistence spring-boot:run
-$ cd target
-$ java -jar notes-0.0.1-SNAPSHOT.jar
+$ mvn clean install
+
+$ java -jar target/notes-0.0.1-SNAPSHOT.jar
 
 ## Web
 Application is available on below localhost:
